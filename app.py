@@ -66,6 +66,13 @@ stats_plein = ImageTk.PhotoImage(Image.open("img/stats_plein.png").resize((134,5
 frame_body = Frame(fenetre,bg="#FFFFFF")
 frame_body.place(x=0,y=170,width=700,height=530)
 
+# fond permanent
+image_body = ImageTk.PhotoImage(Image.open("img/body.png").resize((700,530)))
+
+label_body = Label(frame_body, image=image_body, bd=0)
+label_body.image = image_body
+label_body.place(x=0, y=0)
+
 #endregion
 
 
@@ -73,7 +80,8 @@ frame_body.place(x=0,y=170,width=700,height=530)
 
 def nettoyer_body():
     for widget in frame_body.winfo_children():
-        widget.destroy()
+        if widget != label_body:
+            widget.destroy()
 
 
 def changer_onglet(nouvel_onglet):
