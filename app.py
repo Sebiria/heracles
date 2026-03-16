@@ -2,12 +2,12 @@ from tkinter import *
 from PIL import Image, ImageTk
 
 # import des pages
-from ui import accueil, ajout, bonus_malus, profil, stats
+from ui import accueil, ajout, bonus_malus, profil, stats, parametre
 
 #region Paramétrage fenêtre
 fenetre = Tk()
 fenetre.title("HÉRACLÈS")
-fenetre.iconbitmap("img/icone_heracles.ico")
+# fenetre.iconbitmap("img/icone_heracles.ico")  # Fichier icône manquant - à ajouter
 fenetre.configure(bg="#FFFFFF")
 
 largeur = 700
@@ -58,6 +58,8 @@ bonus_plein = ImageTk.PhotoImage(Image.open("img/bonus_malus_plein.png").resize(
 stats_vide = ImageTk.PhotoImage(Image.open("img/stats_vide.png").resize((134,50)))
 stats_plein = ImageTk.PhotoImage(Image.open("img/stats_plein.png").resize((134,50)))
 
+parametre_img = ImageTk.PhotoImage(Image.open("img/parametre.png").resize((60,60)))
+
 #endregion
 
 
@@ -94,6 +96,12 @@ def changer_onglet(nouvel_onglet):
     label_accueil.config(image=accueil_plein if onglet_actif=="accueil" else accueil_vide)
     label_bonus.config(image=bonus_plein if onglet_actif=="bonus" else bonus_vide)
     label_stats.config(image=stats_plein if onglet_actif=="stats" else stats_vide)
+    
+    # Afficher/masquer le bouton paramètre selon l'onglet actif
+    if onglet_actif == "accueil":
+        frame_parametre.place(x=5,y=350)
+    else:
+        frame_parametre.place_forget()
 
     nettoyer_body()
 
@@ -111,6 +119,9 @@ def changer_onglet(nouvel_onglet):
 
     elif onglet_actif == "stats":
         stats.show(frame_body)
+
+    elif onglet_actif == "parametre":
+        parametre.show(frame_body)
 
 #endregion
 
@@ -137,6 +148,17 @@ label_profil.bind("<Button-1>",lambda e: changer_onglet("profil"))
 label_accueil.bind("<Button-1>",lambda e: changer_onglet("accueil"))
 label_bonus.bind("<Button-1>",lambda e: changer_onglet("bonus"))
 label_stats.bind("<Button-1>",lambda e: changer_onglet("stats"))
+
+# Bouton paramètre (juste au-dessus de "MISE À JOUR NÉCESSAIRE")
+frame_parametre = Frame(fenetre, bg="#B9934B", relief="flat", bd=0)
+frame_parametre.place(x=5,y=350)
+
+label_parametre = Label(frame_parametre, image=parametre_img, bd=0, bg="#B9934B", highlightthickness=0)
+label_parametre.pack(padx=5, pady=5)
+label_parametre.bind("<Button-1>",lambda e: changer_onglet("parametre"))
+
+# Rendre le frame cliquable aussi
+frame_parametre.bind("<Button-1>",lambda e: changer_onglet("parametre"))
 
 #endregion
 

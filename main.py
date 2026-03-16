@@ -7,14 +7,14 @@ date_heure = datetime.now()  # Date et heure
 date_du_jour = datetime.now().date()
 jour = datetime.now().strftime("%A")  # Jour de la semaine
 heure = datetime.now().strftime("%HH%M") # Heure
+date_propre = datetime.now().strftime("%A %d %B %Y")  # Date formatée
 #endregion
 
 profils = {}
 
-
 annee_scolaire = "2026-2027"
 maj_necessaire = ["Monir", "Nabil", "Hassan"]
-nom_site = "Jean Mermoz\nAdrienne Bolland"
+nom_site = "Jean Mermoz\nAdrienne Bolland\nMichel Ange"
 jours_travail = {"p1": [datetime(2026, 9, 1), datetime(2026, 10, 16)],
                  "p2": [datetime(2026, 11, 2), datetime(2026, 12, 18)],
                  "p3": [datetime(2027, 1, 4), datetime(2027, 2, 19)],

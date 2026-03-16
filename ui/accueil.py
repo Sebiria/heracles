@@ -1,11 +1,12 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import time
-from main import annee_scolaire, maj_necessaire, nom_site
+import main
+from main import profils
 
 
 def show(frame_body):
-
+    print(profils)
     image_body = ImageTk.PhotoImage(Image.open("img/body.png").resize((700,530)))
     label_body = Label(frame_body,image=image_body,bd=0)
     label_body.image = image_body
@@ -22,7 +23,7 @@ def show(frame_body):
 
     Label(
         frame_body,
-        text=annee_scolaire,
+        text=main.annee_scolaire,
         font=("Arial",12,"bold"),
         fg="white",
         bg="#B9934B"
@@ -44,14 +45,23 @@ def show(frame_body):
 
     update_clock()
 
+    # Date du jour
+    Label(
+        frame_body,
+        text=main.date_propre,
+        font=("Arial",16,"bold"),
+        fg="white",
+        bg="#B9934B"
+    ).place(x=250,y=20)
+
     # Nom du site (gros titre)
     Label(
         frame_body,
-        text=nom_site,
-        font=("Arial",32,"bold"),
+        text=main.nom_site,
+        font=("Arial",24,"bold"),
         fg="white",
         bg="#B9934B"
-    ).place(x=170,y=40)
+    ).place(relx=0.5, y=70, anchor="n")
 
     # Titre mise à jour
     Label(
@@ -82,8 +92,8 @@ def show(frame_body):
 
             texte = ""
 
-            if index < len(maj_necessaire):
-                texte = maj_necessaire[index]
+            if index < len(main.maj_necessaire):
+                texte = main.maj_necessaire[index]
 
             cellule = Label(
                 frame_grille,
